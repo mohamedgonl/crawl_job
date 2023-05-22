@@ -11,15 +11,3 @@ class JobsDataItem(scrapy.Item):
     # name = scrapy.Field()
     pass
 
-class Job(scrapy.Item):
-    name = scrapy.Field()
-    posting_date = scrapy.Field()
-    salary = scrapy.Field()
-    hours = scrapy.Field()
-    closing_date = scrapy.Field()
-    location = scrapy.Field()
-    company = scrapy.Field()
-    job_type = scrapy.Field()
-    job_reference = scrapy.Field()
-    
-    
