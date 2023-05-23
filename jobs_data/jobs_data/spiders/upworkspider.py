@@ -19,7 +19,7 @@ class UpworkSpider(scrapy.Spider):
             "/freelance-jobs/3d-visualizations/"
         ]
         for url in urls:
-            yield scrapy.Request(url=get_scrapeops_url(self.domain + url), callback=self.get_job,) 
+            yield scrapy.Request(url=get_scrapeops_url(self.domain + url), callback=self.parse,) 
 
     def parse(self, response):  
         job_type = response.css("#main > div > div > section.links-wrapper-section.vs-bg-white.pb-30.pb-md-50.pb-xl-80 > div > div > div > div > div.col-lg-9 > section > div > ul > div > a ")
