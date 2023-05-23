@@ -16,6 +16,7 @@ class FindajobukSpider(scrapy.Spider):
         job_types = response.css("#main > main > div.govuk-grid-row > div.govuk-grid-column-one-quarter.column-filters > ul:nth-child(11) > li > a ::text")
         for (href, type) in zip(job_types_href, job_types):
             yield response.follow(href.attrib['href'], callback=self.get_job, cb_kwargs={'job_type': type.get().replace('\n', '').strip()})
+            
 
 
     def get_job(self, response, job_type):
@@ -23,10 +24,12 @@ class FindajobukSpider(scrapy.Spider):
         for detail in jobs_detail:
             detail_page = detail.attrib['href']
             yield response.follow(detail_page, callback = self.get_detail,cb_kwargs={'job_type': job_type} )
-        
-        next_page = response.css("#pager > div > a").attrib['href']
+                
+        next_page = response.css("#pager > div > a.govuk-link.pager-next").attrib['href']
         if next_page is not None:
-            yield response.follow(next_page, callback = self.get_detail ,cb_kwargs={'job_type': job_type})
+            print("Go next page --------------------------------------------------------------------------")
+            yield response.follow(next_page, callback = self.get_job ,cb_kwargs={'job_type': job_type})
+            
             
              
     def get_detail(self, response, job_type): 
