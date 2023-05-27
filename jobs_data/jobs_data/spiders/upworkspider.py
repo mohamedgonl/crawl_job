@@ -11,7 +11,7 @@ class UpworkSpider(scrapy.Spider):
     name = "upwork"
     allowed_domains = ["www.upwork.com"]
     
-    domain = "https://www.upwork.com"
+    domain = "https://www.upwork.com"   
     
     def start_requests(self):
            
